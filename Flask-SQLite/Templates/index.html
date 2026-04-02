@@ -1,0 +1,30 @@
+<!-- In this file contains two buttons.-->
+<!-- One button to check all the participant's lists(taken from the databse)-->
+<!-- Other button to create a new entry-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flask and SQLite </title>
+    </head>
+    <style>
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF;
+    border-radius: 5px;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+</style>
+    <body>
+        <h1>Build Web App Using Flask and SQLite</h1>
+        <a href="{{ url_for('join') }}" class="btn">Fill Form to Get Updates</a>
+        <a href="{{ url_for('participants') }}" class="btn">Check Participant List</a>
+    </body>
+</html>
