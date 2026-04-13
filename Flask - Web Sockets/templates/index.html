@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask WebSocket Chat</title>
+    <!--Import Socket.IO client library (connects browser to Flask-SocketIO server)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // Connect to the Socket.IO server
+        var socket = io();
+
+        // Ask user for their name when page loads
+        var username = prompt("Enter your name:")
+
+        // Send "join" event to server with username
+        socket.emit("join", username)
+
+        // Listen for "message" event to Server with username
+        socket.on("messages", function(data){
+            // Get the messages container div
+            var messages = document.getElementById("messages");
+            // Append new message as a paragraph
+            messages.innerHTML += `<p>${data}</p>`;
+        });
+        // Function to send message to server
+        function sendMessage(){
+            // Get input field
+            var msgInput = document.getElementById("msg");
+            // Read message value
+            var message = msgInput.value;
+            // send message to server
+            socket.send(message)
+            // clear input field after sending
+            msgInput.value= "";
+        }
+    </script>
+</head>
+<body>
+    <!-- Page heading -->
+    <h2>Flask WebSocket Chat</h2>
+
+    <!-- Input box for typing messages -->
+    <input id="msg" type="text" placeholder="Enter your message">
+
+    <!-- Button to send message -->
+    <button onclick="sendMessage()">Send</button>
+
+    <!-- Div where chat messages will appear -->
+    <div id="messages"></div>
+</body>
+</html>
